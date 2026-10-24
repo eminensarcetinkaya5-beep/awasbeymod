@@ -1,346 +1,343 @@
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Awasbey Launcher V2.5 - GTA V Android</title>
+    <title>AwasBey Launcher V2.5 — GTA V Android</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Orbitron for Gaming Aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#0a0512',
+                            card: '#120924',
+                            cardBorder: '#2a1548',
+                            pink: '#ff007f',
+                            purple: '#b000ff',
+                            neonBlue: '#00f0ff',
+                            amber: '#ffb700',
+                        }
+                    },
+                    boxShadow: {
+                        'neon-pink': '0 0 25px rgba(255, 0, 127, 0.45)',
+                        'neon-purple': '0 0 25px rgba(176, 0, 255, 0.45)',
+                        'card-glow': '0 8px 32px 0 rgba(31, 15, 53, 0.37)'
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
         body {
-            background-color: #0d0614;
+            background-color: #0a0512;
             color: #ffffff;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(176, 0, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(255, 0, 127, 0.12) 0%, transparent 40%);
+            background-attachment: fixed;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .container {
-            max-width: 480px;
-            width: 100%;
+        /* Glassmorphism Card Effect */
+        .glass-card {
+            background: rgba(18, 9, 36, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(176, 0, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        /* Üst Menü */
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0 20px;
-            overflow-x: auto;
-            gap: 10px;
+        .glass-card:hover {
+            border-color: rgba(255, 0, 127, 0.4);
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
-
-        .brand-logo {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, #ff2a8d, #ff7b00);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 12px;
-            color: #fff;
+        ::-webkit-scrollbar-track {
+            background: #0a0512;
         }
-
-        .brand-name {
-            font-size: 18px;
-            font-weight: 900;
-            letter-spacing: 1px;
-        }
-
-        .nav-chips {
-            display: flex;
-            gap: 8px;
-        }
-
-        .chip {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            color: #d1c4e9;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        /* Ana Butonlar */
-        .btn-pink {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(90deg, #b000ff 0%, #ff007f 100%);
-            border: none;
-            border-radius: 16px;
-            color: white;
-            font-size: 16px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(176, 0, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-dark {
-            width: 100%;
-            padding: 16px;
-            background: #180c2e;
-            border: 1px solid #32195e;
-            border-radius: 16px;
-            color: white;
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        /* Başlıklar */
-        .section-title {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Kart Yapısı */
-        .card {
-            background: #140924;
-            border: 1px solid #281248;
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 16px;
-            position: relative;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #b000ff, #ff007f);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 15px;
-            margin-bottom: 12px;
-        }
-
-        .card h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            font-size: 13px;
-            color: #a493c4;
-            line-height: 1.5;
-            margin-bottom: 14px;
-        }
-
-        .badge-once {
-            background: rgba(255, 0, 127, 0.2);
-            border: 1px solid #ff007f;
-            color: #ff77c2;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 2px 8px;
-            border-radius: 10px;
-            margin-left: 6px;
-        }
-
-        /* Link Kopyalama Alanı */
-        .download-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .dl-btn {
-            flex: 1;
-            padding: 14px;
-            background: linear-gradient(90deg, #b000ff, #ff007f);
-            border: none;
-            border-radius: 14px;
-            color: white;
-            font-weight: 800;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            text-decoration: none;
-        }
-
-        .copy-btn {
-            width: 100px;
-            padding: 14px;
-            background: #231145;
-            border: 1px solid #3e1e75;
-            border-radius: 14px;
-            color: white;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-
-        .link-text {
-            font-size: 11px;
-            color: #6d5894;
-            word-break: break-all;
-            margin-bottom: 12px;
-        }
-
-        /* Uyarı Kutusu */
-        .info-card {
-            background: #140924;
-            border: 1px solid #281248;
-            border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            gap: 12px;
-        }
-
-        .info-card .icon {
-            font-size: 20px;
-        }
-
-        .info-card p {
-            font-size: 12px;
-            color: #a493c4;
-            line-height: 1.4;
-        }
-
-        /* Versiyon Tag */
-        .v-tag {
+        ::-webkit-scrollbar-thumb {
             background: #b000ff;
-            color: #fff;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 6px;
-            margin-right: 6px;
+            border-radius: 3px;
+        }
+
+        /* Pulse Animations */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 3s infinite ease-in-out;
         }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased min-h-screen pb-12 selection:bg-cyber-pink selection:text-white">
 
-    <div class="container">
-        
-        <!-- Üst Menü -->
-        <header>
-            <div class="brand">
-                <div class="brand-logo">AWAS</div>
-                <div class="brand-name">AWASBEY</div>
+    <!-- Toast Notification Container -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 transform -translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-gradient-to-r from-cyber-purple to-cyber-pink text-white px-6 py-3 rounded-xl shadow-neon-pink flex items-center gap-3 font-bold text-sm border border-white/20">
+            <i class="fa-solid fa-circle-check text-lg"></i>
+            <span id="toast-msg">Panoya Kopyalandı!</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-md md:max-w-xl mx-auto px-4 pt-4">
+
+        <!-- HEADER / NAVIGATION -->
+        <header class="flex items-center justify-between py-4 mb-4 border-b border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyber-purple via-cyber-pink to-amber-500 p-[2px] shadow-neon-pink">
+                    <div class="w-full h-full bg-cyber-bg rounded-[14px] flex items-center justify-center font-display font-black text-xs text-transparent bg-clip-text bg-gradient-to-r from-cyber-pink to-cyber-purple">
+                        AWAS
+                    </div>
+                </div>
+                <div>
+                    <h1 class="font-display font-extrabold text-lg leading-none tracking-wider text-white">AWASBEY</h1>
+                    <span class="text-[10px] text-gray-400 font-semibold tracking-widest uppercase">GTA V Mobile Edition</span>
+                </div>
             </div>
-            <div class="nav-chips">
-                <a href="#kurulum" class="chip">Kurulum</a>
-                <a href="#yenilikler" class="chip">Yenilikler</a>
-                <a href="#ozellikler" class="chip">Özellikler</a>
+
+            <!-- Header Badges & Links -->
+            <div class="flex gap-2 overflow-x-auto py-1 no-scrollbar">
+                <a href="#kurulum" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-cyber-pink text-xs font-semibold text-gray-300 hover:text-white transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-wrench text-cyber-pink text-[10px]"></i> Kurulum
+                </a>
+                <a href="#yenilikler" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-cyber-purple text-xs font-semibold text-gray-300 hover:text-white transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-sparkles text-cyber-purple text-[10px]"></i> V2.5
+                </a>
             </div>
         </header>
 
-        <!-- Ana Butonlar -->
-        <button class="btn-pink">🚀 Kuruluma başla</button>
-        <button class="btn-dark"><span class="v-tag">NEW</span> V2.5 yenilikleri</button>
-
-        <!-- Adım Başlığı -->
-        <div id="kurulum" class="section-title">🛠️ Kurulum • 4 adım</div>
-
-        <!-- Adım 1 -->
-        <div class="card">
-            <div class="step-number">1</div>
-            <h3>Opera Mini'yi yükleyin <span class="badge-once">ÖNCE BU</span></h3>
-            <p>Dosyaları <b>sadece Opera Mini</b> ile indirin. Diğer tarayıcılar zip dosyasını bozuyor ve dosya çıkartılamıyor[span_6](start_span)[span_6](end_span).</p>
-            <a href="https://play.google.com/store/apps/details?id=com.opera.mini.native" class="dl-btn">► Play Store'dan Opera Mini</a>
-        </div>
-
-        <!-- Adım 2 -->
-        <div class="card">
-            <div class="step-number">2</div>
-            <h3>Linkleri Opera Mini'de açıp indirin</h3>
-            <p>Linki kopyalayın ve Opera Mini'ye yapıştırarak açın[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span).</p>
-
-            <!-- GTA V Dosyaları -->
-            <div class="download-box">
-                <a href="https://buzzheavier.com/y4mgxfmgsx54" class="dl-btn">🎮 GTA V dosyaları</a>
-                <button class="copy-btn" onclick="copyLink('https://buzzheavier.com/y4mgxfmgsx54')">📋 Kopyala</button>
+        <!-- HERO SECTION & ACTIONS -->
+        <div class="mb-6 space-y-3">
+            <div class="p-4 rounded-2xl glass-card relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-cyber-pink/20 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex items-center justify-between mb-3">
+                    <span class="px-2.5 py-1 rounded-md bg-cyber-pink/20 border border-cyber-pink/40 text-cyber-pink font-mono text-[11px] font-bold">
+                        V2.5 LATEST BUILD
+                    </span>
+                    <span class="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Online Hub
+                    </span>
+                </div>
+                <h2 class="text-xl font-extrabold text-white mb-1">GTA V Mobile Port Hub</h2>
+                <p class="text-xs text-gray-300 leading-relaxed">
+                    Android cihazınızda GTA V heyecanını yaşayın. İndirme bağlantıları, kurulum rehberi ve cihaz optimizasyonları aşağıdadır.
+                </p>
             </div>
-            <div class="link-text">https://buzzheavier.com/y4mgxfmgsx54</div>
 
-            <!-- Launcher APK -->
-            <div class="download-box">
-                <a href="https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html" class="dl-btn">↓ Awasbey Launcher V2.5</a>
-                <button class="copy-btn" onclick="copyLink('https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html')">📋 Kopyala</button>
+            <!-- Primary Action Buttons -->
+            <a href="#kurulum" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-cyber-purple to-cyber-pink hover:brightness-110 active:scale-[0.99] transition shadow-neon-pink font-extrabold text-center text-white flex items-center justify-center gap-3 text-base tracking-wide">
+                <i class="fa-solid fa-rocket text-lg"></i>
+                <span>KURULUMA BAŞLA</span>
+            </a>
+
+            <button onclick="toggleLauncherPreview()" class="w-full py-3.5 px-6 rounded-2xl bg-cyber-card border border-cyber-cardBorder hover:border-cyber-purple/60 active:scale-[0.99] transition font-bold text-center text-gray-200 flex items-center justify-center gap-2.5 text-sm">
+                <i class="fa-solid fa-gamepad text-cyber-neonBlue"></i>
+                <span>AwasBey Launcher Önizleme</span>
+                <span class="px-2 py-0.5 rounded bg-cyber-purple/30 text-cyber-purple font-mono text-[10px] font-bold">CANLI MOD</span>
+            </button>
+        </div>
+
+        <!-- SIMULATED LAUNCHER OVERLAY (TOGGLEABLE) -->
+        <div id="launcher-preview" class="hidden mb-6 p-4 rounded-2xl glass-card border-2 border-cyber-pink/50 animate-pulse-glow">
+            <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-display text-cyber-pink"></i>
+                    <span class="font-display font-bold text-sm text-white">Launcher Ekran Ayarları</span>
+                </div>
+                <button onclick="toggleLauncherPreview()" class="text-xs text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
             </div>
-            <div class="link-text">https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html</div>
+            
+            <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-gray-400 mb-1">DXVK Sürümü</div>
+                    <div class="font-bold text-white flex justify-between items-center">
+                        <span>DXVK 2.3-ASYNC</span>
+                        <i class="fa-solid fa-check-circle text-emerald-400"></i>
+                    </div>
+                </div>
+                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-gray-400 mb-1">FPS Sınırlayıcı</div>
+                    <div class="font-bold text-white flex justify-between items-center">
+                        <span>60 FPS MOD</span>
+                        <i class="fa-solid fa-bolt text-cyber-amber"></i>
+                    </div>
+                </div>
+                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-gray-400 mb-1">Çözünürlük</div>
+                    <div class="font-bold text-white">720p Dynamic</div>
+                </div>
+                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-gray-400 mb-1">Sürücü (Driver)</div>
+                    <div class="font-bold text-white">Turnip v24.1.0</div>
+                </div>
+            </div>
+            <p class="text-[11px] text-center text-gray-400 mt-3 italic">
+                *Bu görünüm AwasBey Launcher içindeki grafik ve DXVK ayarlarının temsilidir.
+            </p>
         </div>
 
-        <!-- Adım 3 -->
-        <div class="card">
-            <div class="step-number">3</div>
-            <h3>ZArchiver ile çıkartın ve taşıyın</h3>
-            <p>GTA V dosyasını <b>ZArchiver</b> ile çıkartın. Çıkan <b>Games</b> klasörünü <b>KESİN</b> ve cihazın <b>ana hafızasına</b> (dahili hafızanın en üst dizini) <b>YAPIŞTIRIN</b>[span_10](start_span)[span_10](end_span)[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span).</p>
+        <!-- INSTALLATION GUIDE SECTION -->
+        <div id="kurulum" class="space-y-4 mb-8">
+            <div class="flex items-center justify-between mb-1">
+                <h2 class="font-display font-extrabold text-lg text-white flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-cyber-pink"></i>
+                    <span>KURULUM REHBERİ</span>
+                </h2>
+                <span class="text-xs font-mono text-gray-400">4 Adımda Tamamlayın</span>
+            </div>
+
+            <!-- STEP 1 -->
+            <div class="p-5 rounded-2xl glass-card relative overflow-hidden group">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyber-purple to-cyber-pink flex items-center justify-center font-black text-white shrink-0 shadow-neon-pink">
+                        1
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-1">
+                            <h3 class="font-bold text-white text-base">Opera Mini'yi Yükleyin</h3>
+                            <span class="px-2 py-0.5 rounded bg-cyber-pink/20 border border-cyber-pink/50 text-cyber-pink text-[10px] font-bold tracking-wide">
+                                ÖNCE BU
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                            Dosyaları <strong class="text-white font-bold">sadece Opera Mini</strong> ile indirin. Diğer tarayıcılar (Chrome, Samsung Internet vb.) zip arşiv formatını bozabilir.
+                        </p>
+                        <a href="https://play.google.com/store/apps/details?id=com.opera.mini.native" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyber-purple/80 to-cyber-pink/80 hover:from-cyber-purple hover:to-cyber-pink transition text-xs font-bold text-white flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-google-play text-sm"></i>
+                            <span>Play Store'dan Opera Mini İndir</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="p-5 rounded-2xl glass-card relative overflow-hidden">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyber-purple to-cyber-pink flex items-center justify-center font-black text-white shrink-0 shadow-neon-pink">
+                        2
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white text-base">Linkleri Opera Mini'de Açın & İndirin</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Aşağıdaki linkleri kopyalayıp Opera Mini adres çubuğuna yapıştırarak indirmeyi başlatın.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- LINK 1: GTA V FILES -->
+                <div class="space-y-3 pt-2">
+                    <div class="p-3 rounded-xl bg-cyber-bg/80 border border-white/10">
+                        <div class="text-xs font-bold text-gray-200 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad text-cyber-pink"></i>
+                            <span>GTA V Oyun Dosyaları</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="https://buzzheavier.com/y4mgxfmgsx54" target="_blank" class="flex-1 py-2.5 px-3 rounded-lg bg-cyber-pink hover:bg-cyber-pink/90 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                                <i class="fa-solid fa-download"></i> İndir
+                            </a>
+                            <button onclick="copyToClipboard('https://buzzheavier.com/y4mgxfmgsx54')" class="px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center gap-1.5 transition border border-white/10">
+                                <i class="fa-regular fa-copy"></i> Kopyala
+                            </button>
+                        </div>
+                        <div class="text-[10px] font-mono text-gray-500 mt-1.5 truncate">
+                            https://buzzheavier.com/y4mgxfmgsx54
+                        </div>
+                    </div>
+
+                    <!-- LINK 2: LAUNCHER APK -->
+                    <div class="p-3 rounded-xl bg-cyber-bg/80 border border-white/10">
+                        <div class="text-xs font-bold text-gray-200 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-mobile-screen-button text-cyber-purple"></i>
+                            <span>AwasBey Launcher V2.5 APK</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html" target="_blank" class="flex-1 py-2.5 px-3 rounded-lg bg-cyber-purple hover:bg-cyber-purple/90 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                                <i class="fa-solid fa-download"></i> İndir
+                            </a>
+                            <button onclick="copyToClipboard('https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html')" class="px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center gap-1.5 transition border border-white/10">
+                                <i class="fa-regular fa-copy"></i> Kopyala
+                            </button>
+                        </div>
+                        <div class="text-[10px] font-mono text-gray-500 mt-1.5 truncate">
+                            https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="p-5 rounded-2xl glass-card relative overflow-hidden">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyber-purple to-cyber-pink flex items-center justify-center font-black text-white shrink-0 shadow-neon-pink">
+                        3
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white text-base mb-1">ZArchiver ile Çıkartın & Taşıyın</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                            ZArchiver uygulamasını açın. İndirdiğiniz GTA V zip arşivini çıkartın. Çıkan <strong class="text-cyber-amber font-bold">Games</strong> klasörünü kopyalayıp cihazınızın <strong class="text-white font-bold">Ana Hafızasına (Dahili Depolama / Dizin Başı)</strong> yapıştırın.
+                        </p>
+                        <div class="p-2.5 rounded-lg bg-black/40 border border-white/10 font-mono text-[11px] text-gray-300 flex items-center gap-2">
+                            <i class="fa-solid fa-folder-tree text-cyber-amber"></i>
+                            <span>Ana Hafıza / Games / GTAV / ...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="p-5 rounded-2xl glass-card relative overflow-hidden">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyber-purple to-cyber-pink flex items-center justify-center font-black text-white shrink-0 shadow-neon-pink">
+                        4
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white text-base mb-1">APK'yı Yükleyin ve Başlatın</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            <strong class="text-white font-bold">AwasBey Launcher V2.5 APK</strong> dosyasını kurun, açın ve tek tıkla oyunu başlatın. Keyifli oyunlar! 🎉
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Adım 4 -->
-        <div class="card">
-            <div class="step-number">4</div>
-            <h3>APK'yı yükleyin ve oyunu başlatın</h3>
-            <p><b>Awasbey Launcher</b>'ı yükleyin, açın ve oyunu başlatın. İyi oyunlar! 🎉[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span)</p>
-        </div>
+        <!-- HARDWARE & REQUIREMENTS WARNING CARDS -->
+        <div class="space-y-3 mb-8">
+            <h2 class="font-display font-extrabold text-sm text-gray-400 tracking-wider uppercase mb-2">
+                Sistem Gereksinimleri & İpuçları
+            </h2>
 
-        <!-- Uyarı Bilgileri -->
-        <div class="info-card">
-            <div class="icon">📱</div>
-            <p>Sadece <b>Snapdragon (Adreno GPU)</b> işlemcili cihazlarda çalışır. MediaTek / Dimensity, Exynos ve Mali henüz desteklenmiyor. 8 GB ve üzeri RAM önerilir[span_15](start_span)[span_15](end_span).</p>
-        </div>
+            <div class="p-4 rounded-2xl glass-card border-l-4 border-l-cyber-amber flex items-start gap-3">
+                <i class="fa-solid fa-microchip text-cyber-amber text-lg mt-0.5"></i>
+                <div class="text-xs text-gray-300 leading-relaxed">
+                    <strong class="text-white font-bold block mb-0.5">Uyumlu İşlemci Uyarısı</strong>
+                    Yalnızca <strong class="text-white">Snapdragon (Adreno GPU)</strong> işlemcili cihazlarda çalışır. MediaTek / Dimensity, Exynos ve Mali ekran kartları henüz desteklenmemektedir. En az <strong class="text-white">8 GB RAM</strong> önerilir.
+                </div>
+            </div>
 
-        <div class="info-card">
-            <div class="icon">💥</div>
-            <p>Oyun <b>atarsa / çökerse</b> başka bir DXVK sürümü seçin[span_16](start_span)[span_16](end_span).</p>
-        </div>
-
-        <!-- Yenilikler -->
-        <div id="yenilikler" class="section-title"><span class="v-tag">NEW</span> Yenilikler</div>
-        
-        <div class="card">
-            <h3>Cihaza Özel Ayarlar:</h3>
-            <p><span class="v-tag">V2.5</span> <b>Xiaomi Pad 6 / Poco F5:</b> Stabil 30 FPS ayarı eklendi[span_17](start_span)[span_17](end_span).</p>
-        </div>
-
-    </div>
-
-    <script>
-        function copyLink(text) {
-            navigator.clipboard.writeText(text);
-            alert("Link kopyalandı!");
-        }
-    </script>
-</body>
-</html>
+            <div class="p-4 rounded-2xl glass-card border-l-4 border-l-cyber-pink flex items-start gap-3">
+                <i class="fa-solid fa-triangle-exclamation text-cyber-pink text-lg mt-0.5"></i>
+                <div class="text-xs text-gray-300 leading-relaxed">
+                    <strong class="text-white font-bold block mb-0.5">Oyun İçi Çökme / Atma Çözümü</strong>
+                    Eğer oyun açılışta kapanırs

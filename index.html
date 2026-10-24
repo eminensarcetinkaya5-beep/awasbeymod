@@ -2,536 +2,345 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Awasbey Launcher V2.5 - GTA V Android</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #0a0412;
+            background-color: #0d0614;
             color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
+            padding: 16px;
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
 
-        /* Üst Bar (Header) */
+        .container {
+            max-width: 480px;
+            width: 100%;
+        }
+
+        /* Üst Menü */
         header {
-            height: 60px;
-            background: linear-gradient(180deg, #160a29 0%, #0a0412 100%);
-            border-bottom: 1px solid #ff007f33;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 16px;
-            z-index: 10;
+            padding: 10px 0 20px;
+            overflow-x: auto;
+            gap: 10px;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .brand-logo {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #ff3b94, #ff883b);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 13px;
-            letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(255, 59, 148, 0.4);
-        }
-
-        .brand-text h1 {
-            font-size: 16px;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            color: #ff3b94;
-        }
-
-        .brand-text p {
-            font-size: 11px;
-            color: #8f85a3;
-        }
-
-        .mod-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #ffb86c;
-        }
-
-        /* Ana Alan Layout */
-        .main-container {
-            display: flex;
-            flex: 1;
-            height: calc(100vh - 130px);
-            overflow: hidden;
-        }
-
-        /* Sol Menü (Sidebar) */
-        .sidebar {
-            width: 220px;
-            background: #0f071c;
-            border-right: 1px solid #23123d;
-            overflow-y: auto;
-            padding: 10px 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .sidebar-category {
-            font-size: 10px;
-            font-weight: bold;
-            color: #655480;
-            padding: 8px 12px 4px;
-            letter-spacing: 1px;
-        }
-
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            border-radius: 12px;
-            background: transparent;
-            color: #a292be;
-            border: none;
-            font-size: 13px;
-            font-weight: 600;
-            text-align: left;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s;
-        }
-
-        .nav-btn.active {
-            background: linear-gradient(90deg, #ff3b94 0%, #ff883b 100%);
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(255, 59, 148, 0.3);
-        }
-
-        .nav-btn span.icon {
-            font-size: 16px;
-        }
-
-        /* Sağ İçerik Alanı */
-        .content-area {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background: #0a0412;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-
-        .section-header .icon-box {
-            width: 36px;
-            height: 36px;
-            background: #ff3b9422;
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #ff2a8d, #ff7b00);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ff3b94;
-            font-size: 18px;
-        }
-
-        .section-header h2 {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .section-desc {
+            font-weight: 900;
             font-size: 12px;
-            color: #8f85a3;
-            margin-bottom: 20px;
-            line-height: 1.4;
+            color: #fff;
         }
 
-        /* Ayar Kartları */
-        .setting-card {
-            background: #140926;
-            border: 1px solid #23123d;
-            border-radius: 14px;
+        .brand-name {
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .nav-chips {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #d1c4e9;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        /* Ana Butonlar */
+        .btn-pink {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, #b000ff 0%, #ff007f 100%);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(176, 0, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-dark {
+            width: 100%;
+            padding: 16px;
+            background: #180c2e;
+            border: 1px solid #32195e;
+            border-radius: 16px;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Başlıklar */
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Kart Yapısı */
+        .card {
+            background: #140924;
+            border: 1px solid #281248;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #b000ff, #ff007f);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 13px;
+            color: #a493c4;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .badge-once {
+            background: rgba(255, 0, 127, 0.2);
+            border: 1px solid #ff007f;
+            color: #ff77c2;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+        }
+
+        /* Link Kopyalama Alanı */
+        .download-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .dl-btn {
+            flex: 1;
             padding: 14px;
+            background: linear-gradient(90deg, #b000ff, #ff007f);
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-weight: 800;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .copy-btn {
+            width: 100px;
+            padding: 14px;
+            background: #231145;
+            border: 1px solid #3e1e75;
+            border-radius: 14px;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .link-text {
+            font-size: 11px;
+            color: #6d5894;
+            word-break: break-all;
+            margin-bottom: 12px;
+        }
+
+        /* Uyarı Kutusu */
+        .info-card {
+            background: #140924;
+            border: 1px solid #281248;
+            border-radius: 18px;
+            padding: 16px;
             margin-bottom: 12px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .setting-info h4 {
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .setting-info p {
-            font-size: 11px;
-            color: #8f85a3;
-        }
-
-        select {
-            background: #0a0412;
-            border: 1px solid #ff3b9444;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 8px;
-            outline: none;
-            font-size: 12px;
-        }
-
-        /* Switch Toggle */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 44px;
-            height: 24px;
-        }
-
-        .switch input { opacity: 0; width: 0; height: 0; }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #23123d;
-            transition: .3s;
-            border-radius: 24px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px; width: 18px;
-            left: 3px; bottom: 3px;
-            background-color: white;
-            transition: .3s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider { background: linear-gradient(90deg, #ff3b94, #ff883b); }
-        input:checked + .slider:before { transform: translateX(20px); }
-
-        /* Alt Başlatma Barı */
-        .bottom-bar {
-            height: 70px;
-            background: #0f071c;
-            border-top: 1px solid #23123d;
-            display: flex;
-            align-items: center;
-            padding: 0 16px;
             gap: 12px;
         }
 
-        .play-btn {
-            flex: 1;
-            height: 48px;
-            background: linear-gradient(90deg, #ff3b94 0%, #ff883b 100%);
-            border: none;
-            border-radius: 24px;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 59, 148, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .info-card .icon {
+            font-size: 20px;
         }
 
-        .info-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 24px;
-            background: #140926;
-            border: 1px solid #23123d;
+        .info-card p {
+            font-size: 12px;
+            color: #a493c4;
+            line-height: 1.4;
+        }
+
+        /* Versiyon Tag */
+        .v-tag {
+            background: #b000ff;
             color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        /* Modal Hata Penceresi */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            padding: 20px;
-        }
-
-        .modal-card {
-            background: #140926;
-            border: 1px solid #ff3b9466;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 100%;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-
-        .modal-card h3 {
-            font-size: 18px;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-
-        .modal-card p {
-            font-size: 13px;
-            color: #a292be;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .modal-btn {
-            width: 100%;
-            padding: 12px;
-            background: #23123d;
-            border: 1px solid #ff3b9444;
-            color: #fff;
-            border-radius: 12px;
+            font-size: 10px;
             font-weight: bold;
-            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 6px;
+            margin-right: 6px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Üst Başlık -->
-    <header>
-        <div class="brand">
-            <div class="brand-logo">AWAS</div>
-            <div class="brand-text">
-                <h1>AWASBEY LAUNCHER</h1>
-                <p>GTA V • Ayarlar soldaki menüde, oyunu alttaki düğmeyle başlatın</p>
+    <div class="container">
+        
+        <!-- Üst Menü -->
+        <header>
+            <div class="brand">
+                <div class="brand-logo">AWAS</div>
+                <div class="brand-name">AWASBEY</div>
             </div>
+            <div class="nav-chips">
+                <a href="#kurulum" class="chip">Kurulum</a>
+                <a href="#yenilikler" class="chip">Yenilikler</a>
+                <a href="#ozellikler" class="chip">Özellikler</a>
+            </div>
+        </header>
+
+        <!-- Ana Butonlar -->
+        <button class="btn-pink">🚀 Kuruluma başla</button>
+        <button class="btn-dark"><span class="v-tag">NEW</span> V2.5 yenilikleri</button>
+
+        <!-- Adım Başlığı -->
+        <div id="kurulum" class="section-title">🛠️ Kurulum • 4 adım</div>
+
+        <!-- Adım 1 -->
+        <div class="card">
+            <div class="step-number">1</div>
+            <h3>Opera Mini'yi yükleyin <span class="badge-once">ÖNCE BU</span></h3>
+            <p>Dosyaları <b>sadece Opera Mini</b> ile indirin. Diğer tarayıcılar zip dosyasını bozuyor ve dosya çıkartılamıyor[span_6](start_span)[span_6](end_span).</p>
+            <a href="https://play.google.com/store/apps/details?id=com.opera.mini.native" class="dl-btn">► Play Store'dan Opera Mini</a>
         </div>
-        <div class="mod-badge">Oyunda Awasbey Mod: X + Sol</div>
-    </header>
 
-    <!-- Ana Gövde -->
-    <div class="main-container">
-        <!-- Sol Menü -->
-        <div class="sidebar">
-            <div class="sidebar-category">AYARLAR</div>
-            <button class="nav-btn active" onclick="switchTab('grafik', this)"><span class="icon">⚙️</span> Grafik</button>
-            <button class="nav-btn" onclick="switchTab('ekran', this)"><span class="icon">🖥️</span> Ekran</button>
-            <button class="nav-btn" onclick="switchTab('dunya', this)"><span class="icon">🌐</span> Dünya ve Oyun</button>
-            <button class="nav-btn" onclick="switchTab('kontroller', this)"><span class="icon">🎮</span> Dokunmatik kontroller</button>
-            <button class="nav-btn" onclick="switchTab('titresim', this)"><span class="icon">📲</span> Titreşim ve kumanda</button>
-            <button class="nav-btn" onclick="switchTab('suruculer', this)"><span class="icon">⚙️</span> Sürücüler</button>
-            <button class="nav-btn" onclick="switchTab('hud', this)"><span class="icon">⏲️</span> Performans HUD</button>
-            <button class="nav-btn" onclick="switchTab('cihaz', this)"><span class="icon">📱</span> Cihaza Özel Ayarlar</button>
-            
-            <div class="sidebar-category">DİĞER</div>
-            <button class="nav-btn" onclick="switchTab('hakkinda', this)"><span class="icon">ℹ️</span> Hakkında</button>
+        <!-- Adım 2 -->
+        <div class="card">
+            <div class="step-number">2</div>
+            <h3>Linkleri Opera Mini'de açıp indirin</h3>
+            <p>Linki kopyalayın ve Opera Mini'ye yapıştırarak açın[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span).</p>
+
+            <!-- GTA V Dosyaları -->
+            <div class="download-box">
+                <a href="https://buzzheavier.com/y4mgxfmgsx54" class="dl-btn">🎮 GTA V dosyaları</a>
+                <button class="copy-btn" onclick="copyLink('https://buzzheavier.com/y4mgxfmgsx54')">📋 Kopyala</button>
+            </div>
+            <div class="link-text">https://buzzheavier.com/y4mgxfmgsx54</div>
+
+            <!-- Launcher APK -->
+            <div class="download-box">
+                <a href="https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html" class="dl-btn">↓ Awasbey Launcher V2.5</a>
+                <button class="copy-btn" onclick="copyLink('https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html')">📋 Kopyala</button>
+            </div>
+            <div class="link-text">https://dosya.co/i09x7tigc877/_AwasBey_Launcher_20327791.apk.html</div>
         </div>
 
-        <!-- Sağ İçerik Alanı -->
-        <div class="content-area">
-            
-            <!-- Grafik Sekmesi -->
-            <div id="grafik" class="tab-content active">
-                <div class="section-header">
-                    <div class="icon-box">⚙️</div>
-                    <h2>Grafik Ayarları</h2>
-                </div>
-                <p class="section-desc">DXVK ve işleme sürücüsü ayarlarını düzenleyin.</p>
-                
-                <div class="setting-card">
-                    <div class="setting-info">
-                        <h4>DXVK Sürümü</h4>
-                        <p>Oyunun çökmesini önlemek için uygun sürümü seçin</p>
-                    </div>
-                    <select>
-                        <option>DXVK 2.3-Awasbey (Önerilen)</option>
-                        <option>DXVK 1.10.3 Async</option>
-                    </select>
-                </div>
-
-                <div class="setting-card">
-                    <div class="setting-info">
-                        <h4>Kare Hızı Sınırlayıcı</h4>
-                        <p>Cihaz ısınmasını engeller</p>
-                    </div>
-                    <select>
-                        <option>60 FPS</option>
-                        <option>30 FPS</option>
-                        <option>Sınırsız (120 FPS)</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Ekran Sekmesi -->
-            <div id="ekran" class="tab-content">
-                <div class="section-header">
-                    <div class="icon-box">🖥️</div>
-                    <h2>Ekran Çözünürlüğü</h2>
-                </div>
-                <p class="section-desc">Oyun içi çözünürlük ve en boy oranını ayarlayın.</p>
-                
-                <div class="setting-card">
-                    <div class="setting-info">
-                        <h4>Çözünürlük</h4>
-                        <p>Yüksek çözünürlük performansı düşürebilir</p>
-                    </div>
-                    <select>
-                        <option>1280x720 (HD - Önerilen)</option>
-                        <option>960x540 (Performans)</option>
-                        <option>1920x1080 (FHD)</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Dokunmatik Kontroller Sekmesi -->
-            <div id="kontroller" class="tab-content">
-                <div class="section-header">
-                    <div class="icon-box">🎮</div>
-                    <h2>Dokunmatik Kontroller</h2>
-                </div>
-                <p class="section-desc">Dokunmatik düzenler, düğme düzenleyici ve HUD konumları.</p>
-                
-                <div class="setting-card">
-                    <div class="setting-info">
-                        <h4>Mobil Yaya Kontrolleri</h4>
-                        <p>Yürürken ekranda görünecek butonlar</p>
-                    </div>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                </div>
-
-                <div class="setting-card">
-                    <div class="setting-info">
-                        <h4>Mobil Sürüş Kontrolleri</h4>
-                        <p>Araç sürerken görünür butonlar</p>
-                    </div>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                </div>
-            </div>
-
-            <!-- Performans HUD Sekmesi -->
-            <div id="hud" class="tab-content">
-                <div class="section-header">
-                    <div class="icon-box">⏲️</div>
-                    <h2>Performans HUD</h2>
-                </div>
-                <p class="section-desc">Oyun içi FPS / CPU / GPU / RAM göstergesi.</p>
-
-                <div class="setting-card">
-                    <div class="setting-info">
-                        <h4>FPS Göstergesi</h4>
-                        <p>Ekranda anlık kare hızını gösterir</p>
-                    </div>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                </div>
-            </div>
-
-            <!-- Cihaza Özel Ayarlar Sekmesi -->
-            <div id="cihaz" class="tab-content">
-                <div class="section-header">
-                    <div class="icon-box">📱</div>
-                    <h2>Cihaza Özel Ayarlar</h2>
-                </div>
-                <p class="section-desc">İşlemcinize özel optimizasyon profili.</p>
-
-                <div class="setting-card">
-                    <div class="setting-info">
-                        <h4>Snapdragon Adreno Turbo</h4>
-                        <p>Adreno GPU serisi için ekstra performans</p>
-                    </div>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                </div>
-            </div>
-
-            <!-- Diğer Sekmeler -->
-            <div id="dunya" class="tab-content">
-                <div class="section-header"><div class="icon-box">🌐</div><h2>Dünya ve Oyun Ayarları</h2></div>
-                <p class="section-desc">Oyun dili ve harita tercihleri.</p>
-            </div>
-            <div id="titresim" class="tab-content">
-                <div class="section-header"><div class="icon-box">📲</div><h2>Titreşim ve Kumanda</h2></div>
-                <p class="section-desc">Gamepad ve titreşim geri bildirim ayarları.</p>
-            </div>
-            <div id="suruculer" class="tab-content">
-                <div class="section-header"><div class="icon-box">⚙️</div><h2>GPU Sürücüleri</h2></div>
-                <p class="section-desc">Turnip ve Zink sürücü versiyonları.</p>
-            </div>
-            <div id="hakkinda" class="tab-content">
-                <div class="section-header"><div class="icon-box">ℹ️</div><h2>Awasbey Launcher V2.5</h2></div>
-                <p class="section-desc">Özel yapım mobil GTA V başlatıcısı. Tüm hakları Awasbey'e aittir.</p>
-            </div>
-
+        <!-- Adım 3 -->
+        <div class="card">
+            <div class="step-number">3</div>
+            <h3>ZArchiver ile çıkartın ve taşıyın</h3>
+            <p>GTA V dosyasını <b>ZArchiver</b> ile çıkartın. Çıkan <b>Games</b> klasörünü <b>KESİN</b> ve cihazın <b>ana hafızasına</b> (dahili hafızanın en üst dizini) <b>YAPIŞTIRIN</b>[span_10](start_span)[span_10](end_span)[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span).</p>
         </div>
-    </div>
 
-    <!-- Alt Başlatma Butonu -->
-    <div class="bottom-bar">
-        <button class="play-btn" onclick="startGame()">OYUNU BAŞLAT</button>
-        <button class="info-btn" onclick="alert('Awasbey Launcher V2.5 aktif ve çalışıyor.')">i</button>
-    </div>
-
-    <!-- Eksik Dosya Uyarısı Modalı -->
-    <div id="errorModal" class="modal-overlay">
-        <div class="modal-card">
-            <h3>Eksik oyun dosyaları</h3>
-            <p><b>Games/GTAV</b> içinde <b>common.rpf</b> bulunamadı.<br>Oyun verisi <b>common.rpf</b>, <b>x64</b> ve <b>update</b> içermelidir.</p>
-            <button class="modal-btn" onclick="closeModal()">Kapat</button>
+        <!-- Adım 4 -->
+        <div class="card">
+            <div class="step-number">4</div>
+            <h3>APK'yı yükleyin ve oyunu başlatın</h3>
+            <p><b>Awasbey Launcher</b>'ı yükleyin, açın ve oyunu başlatın. İyi oyunlar! 🎉[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span)</p>
         </div>
+
+        <!-- Uyarı Bilgileri -->
+        <div class="info-card">
+            <div class="icon">📱</div>
+            <p>Sadece <b>Snapdragon (Adreno GPU)</b> işlemcili cihazlarda çalışır. MediaTek / Dimensity, Exynos ve Mali henüz desteklenmiyor. 8 GB ve üzeri RAM önerilir[span_15](start_span)[span_15](end_span).</p>
+        </div>
+
+        <div class="info-card">
+            <div class="icon">💥</div>
+            <p>Oyun <b>atarsa / çökerse</b> başka bir DXVK sürümü seçin[span_16](start_span)[span_16](end_span).</p>
+        </div>
+
+        <!-- Yenilikler -->
+        <div id="yenilikler" class="section-title"><span class="v-tag">NEW</span> Yenilikler</div>
+        
+        <div class="card">
+            <h3>Cihaza Özel Ayarlar:</h3>
+            <p><span class="v-tag">V2.5</span> <b>Xiaomi Pad 6 / Poco F5:</b> Stabil 30 FPS ayarı eklendi[span_17](start_span)[span_17](end_span).</p>
+        </div>
+
     </div>
 
     <script>
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        function startGame() {
-            // Oyun dosyası kontrol simülasyonu
-            document.getElementById('errorModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('errorModal').style.display = 'none';
+        function copyLink(text) {
+            navigator.clipboard.writeText(text);
+            alert("Link kopyalandı!");
         }
     </script>
 </body>
-  </html>
-  
+</html>
